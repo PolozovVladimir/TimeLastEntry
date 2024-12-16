@@ -25,16 +25,18 @@ fun timeToText(time: String, type: Time): String {
     val lastSymbol = time[time.length - 1]
     when (type) {
         Time.MINUTE ->
-            when (lastSymbol) {
-                '1' -> return "минуту"
-                in '2'..'4' -> return "минуты"
-                in '5'..'9', '0' -> return "минут"
+            when {
+                time.toInt() in 11..14 -> return "минут"
+                lastSymbol == '1' -> return "минуту"
+                lastSymbol in '2'..'4' -> return "минуты"
+                lastSymbol in '5'..'9'-> return "минут"
             }
         Time.HOUR ->
-            when (lastSymbol) {
-                '1' -> return "час"
-                in '2'..'4' -> return "часа"
-                in '5'..'9', '0' -> return "часов"
+            when {
+                time.toInt() in 11..14 -> return "часов"
+                lastSymbol == '1' -> return "час"
+                lastSymbol in '2'..'4' -> return "часа"
+                lastSymbol in '5'..'9' -> return "часов"
             }
         else -> return "Error"
     }
